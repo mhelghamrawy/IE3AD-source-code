@@ -11,15 +11,16 @@ public class Main {
     // task 1.2.1
     private static void testConstructor() {
         ArithmeticTerm term;
-        term = new ArithmeticTerm("5.1 9 8.88 + 4 sqrt 6 / ^7 -");
+        term = new ArithmeticTerm("5.1 9 8.88 + 4 sqrt 6 / ^ 7 - *");
 
         System.out.println(term.toString());
+        System.out.println(term.evaluate());
     }
 
     // task 1.2.2
     private static void testTokenizer() {
         ArithmeticTerm term1;
-        term1 = new ArithmeticTerm("5.1 9 8.88 + 4 sqrt 6 / ^7 - *");
+        term1 = new ArithmeticTerm("5.1 9 8.88 + 4 sqrt 6 / ^ 7 - *");
 
         ArithmeticTerm term2;
         term2 = new ArithmeticTerm("( 5.1 * ( ( ( 9 + 8.88 ) ^ ( ( sqrt 4 ) / 6 ) ) - 7 ) )");
