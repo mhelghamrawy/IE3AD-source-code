@@ -7,12 +7,13 @@ public class Main {
         SUBMISSION
         * */
         testConvertor();
+        testFinal();
 
         /*
         PREPARATION
         * */
-        testConstructor();
-        testTokenizer();
+        // testConstructor();
+        // testTokenizer();
 
     }
 
@@ -40,6 +41,21 @@ public class Main {
 
         System.out.println(term1.getReversedExpression());
         System.out.println(term2.getReversedExpression());
+    }
+
+    // task 2.2
+    private static void testFinal() {
+        ArithmeticTerm term1 = new ArithmeticTerm("10 9 125.6 + 9 sqrt 6 / ^ 1 - *");
+        ArithmeticTerm term2 = new ArithmeticTerm("1 9 25.6 + 2 sqrt 6 * ^ 3 + /");
+        ArithmeticTerm term3 = new ArithmeticTerm("17 20 128 + 5 6 / ^ 5 - *");
+        ArithmeticTerm term4 = new ArithmeticTerm("8 2 255 + 6 / ^ 5 -");
+        ArithmeticTerm term5 = new ArithmeticTerm("8 25.5 + 6 / 2 ^ 5 -");
+
+        System.out.println(term1.evaluate());
+        System.out.println(term2.evaluate());
+        System.out.println(term3.evaluate());
+        System.out.println(term4.evaluate());
+        System.out.println(term5.evaluate());
     }
 
     // task 2.3

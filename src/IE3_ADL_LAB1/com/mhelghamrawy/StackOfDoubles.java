@@ -15,9 +15,13 @@ public class StackOfDoubles {
         first.nextNode = second;
     }
     public double pop() {
-        double poppedOperand = first.operand;
-        first = first.nextNode;
-        return poppedOperand;
+        try {
+            double poppedOperand = first.operand;
+            first = first.nextNode;
+            return poppedOperand;
+        } catch(Exception e) {
+            throw new IllegalStateException("Incorrect number of arguments given.");
+        }
     }
 
     public boolean isEmpty() {
