@@ -22,78 +22,66 @@ public class Tree {
     }
 
     public BiNode construct(String postfix) {
-        // Reverse and tokenize the input postfix expression
-        Stack<String> reversedExpression;
-        reversedExpression = reverse(postfix);
+        // tokenize the input postfix expression
+        String[] tokenizer;
+        tokenizer = postfix.split(" ");
 
+        // stack to temporarily hold nodes
         Stack<BiNode> stack;
         stack = new Stack<>();
 
-        BiNode tree;
-        BiNode child1;
-        BiNode child2;
-
         // Traverse through every element of the input postfix expression
-        while (!reversedExpression.isEmpty()) {
-            String element;
-            element = reversedExpression.pop();
+        for (int i = 0; i < tokenizer.length; i++) {
+            BiNode tree;
+            // If binary operator, construct new parent node and add children from stack
+            if(ArithmeticTerm.isBinaryOperator((tokenizer[i]))) {
+                tree = new BiNode(tokenizer[i]);
 
-            // If operand, simply push into stack
-            if(ArithmeticTerm.isOperator(element)) {
-                tree = new BiNode(element);
-            }
-            else {
-                tree = new BiNode(element);
-                ;
                 // Pop two top nodes
                 // Store top
-                    child1 = new BiNode(reversedExpression.pop());      // Remove top
-                    child2 = new BiNode(reversedExpression.pop());
+                tree.leftChildNode = stack.pop();
+                tree.rightChildNode = stack.pop();
 
-                    //  make them children
-                    tree.rightChildNode = child1;
-                    tree.leftChildNode = child2;
+                // Add this element to stack
+                stack.push(tree);
             }
-            // Add this element to stack
-            stack.push(tree);
-        }
+            // If unary operator, construct new parent node and add child from stack
+            else if(ArithmeticTerm.isUnaryOperator(tokenizer[i])) {
+                tree = new BiNode(tokenizer[i]);
 
-        // last element will be root of expression tree
-        try {
-            tree = stack.pop();
-        } catch (Exception e) {
-            // throw exception when postfix expression doesn't contain enough elements
-            throw new IllegalStateException("Incorrect number of arguments given.");
-        }
+                tree.leftChildNode = stack.pop();
 
-        // throw exception when postfix expression doesn't contains extra elements
-        if(!reversedExpression.isEmpty()) {
-            throw new IllegalStateException("Incorrect number of arguments given.");
+                // Add this element to stack
+                stack.push(tree);
+            }
+            else { // If operand, simply push into stack
+                stack.push(new BiNode(tokenizer[i]));
+            }
         }
-
-        return tree;
+        return stack.pop();
     }
 
     /*
      * A method which tokenizes the String with the postfix arithmetic term,
-     * and uses a stack of Strings (java.util.Stack<String>) to store the tokens of the arithmetic expression,
-     * and writes it in the opposite order to the string instance variable.
+     * and uses a stack of Strings (java.util.Stack<String>) to store the tokens of the arithmetic expression.
      *
      * @author Mohamed ElGhamrawy
      * */
-    public Stack<String> reverse(String postfix) {
+    public Stack<String> tokenize(String postfix) {
         // initialize return variable
-        Stack<String> reversedExpression;
-        reversedExpression = new Stack<>();
+        Stack<String> tokenizedExpression;
+        tokenizedExpression = new Stack<>();
 
         // step 1: tokenize postfix expression
         String[] tokenizer;
         tokenizer = postfix.split(" ");
 
-        // step 2: reverse postfix expression TODO
-        for (int i = tokenizer.length - 1; i >= 0; i--) {
-            reversedExpression.push(tokenizer[i]);
+        // step 2: form stack
+        for (int i = 0; i <= tokenizer.length - 1; i++) {
+            tokenizedExpression.push(tokenizer[i]);
         }
-        return reversedExpression;
+        return tokenizedExpression;
     }
+
+
 }
