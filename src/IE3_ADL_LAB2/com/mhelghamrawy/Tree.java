@@ -39,22 +39,20 @@ public class Tree {
             element = reversedExpression.pop();
 
             // If operand, simply push into stack
-            if(!ArithmeticTerm.isOperator(element)) {
+            if(ArithmeticTerm.isOperator(element)) {
                 tree = new BiNode(element);
             }
             else {
                 tree = new BiNode(element);
-
+                ;
                 // Pop two top nodes
                 // Store top
-                try {
-                    child1 = stack.pop();      // Remove top
-                    child2 = stack.pop();
+                    child1 = new BiNode(reversedExpression.pop());      // Remove top
+                    child2 = new BiNode(reversedExpression.pop());
 
                     //  make them children
                     tree.rightChildNode = child1;
                     tree.leftChildNode = child2;
-                } catch(Exception e) {}
             }
             // Add this element to stack
             stack.push(tree);
@@ -69,7 +67,7 @@ public class Tree {
         }
 
         // throw exception when postfix expression doesn't contains extra elements
-        if(!stack.isEmpty()) {
+        if(!reversedExpression.isEmpty()) {
             throw new IllegalStateException("Incorrect number of arguments given.");
         }
 
@@ -92,7 +90,7 @@ public class Tree {
         String[] tokenizer;
         tokenizer = postfix.split(" ");
 
-        // step 2: reverse postfix expression
+        // step 2: reverse postfix expression TODO
         for (int i = tokenizer.length - 1; i >= 0; i--) {
             reversedExpression.push(tokenizer[i]);
         }
