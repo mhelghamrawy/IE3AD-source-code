@@ -20,11 +20,12 @@ public class ArithmeticTerm {
         reverse();
     }
 
+    @Override
     public String toString() {
         return expression;
     }
 
-    /*
+    /**
      * A method which tokenizes the String with the arithmetic term,
      * and uses a stack of Strings (java.util.Stack<String>) to store the tokens of the arithmetic expression,
      * and writes it in the opposite order to the string instance variable.
@@ -41,7 +42,7 @@ public class ArithmeticTerm {
         }
     }
 
-    /*
+    /**
      * A method which uses a stack of doubles to evaluate the postfix expression with
      * an extended version of the algorithm postfix2value that supports the following binary operators:
      * addition (+),
@@ -96,7 +97,7 @@ public class ArithmeticTerm {
             else if (element.endsWith("!")) {
                 element = element.substring(0, element.length() - 1);
                 try {
-                    operandStack.push(factorial(Integer.parseInt(element)));
+                    operandStack.push(MathSupport.factorial(Integer.parseInt(element)));
                 } catch (Exception e) {
                     throw new IllegalStateException("Unexpected value: " + element);
                 }
@@ -137,19 +138,6 @@ public class ArithmeticTerm {
             throw new IllegalStateException("Incorrect number of arguments given.");
     }
 
-    /*
-     * A method which assists the evaluate() method by calculating factorials recursively.
-     *
-     * @parameters n an integer to be factorialized
-     * @return  an integer with the value of n!
-     *
-     * @author Mohamed ElGhamrawy
-     * */
-    private int factorial(int n) {
-        return (n == 1 || n == 0) ? 1 : n*factorial(n-1);
-
-    }
-
     /**
      * Converts the FPAE (Fully Parenthesized Arithmetic Expression) from inFix form to postFix form
      * test cases are:
@@ -164,14 +152,14 @@ public class ArithmeticTerm {
      */
     public String convert() {
         StringTokenizer token = new StringTokenizer(this.expression);
-        Stack<String> operatorStack = new Stack<String>();
+        Stack<String> operatorStack = new Stack<>();
         String postFixExpression = "";
 
         while (token.hasMoreTokens()) {
             String currentToken = token.nextToken();
-            if (checkDouble(currentToken)) {
+            if (MathSupport.checkDouble(currentToken)) {
                 postFixExpression += currentToken + " ";
-            } else if (isBinaryOperator(currentToken) || isUnaryOperator(currentToken)) {
+            } else if (MathSupport.isBinaryOperator(currentToken) || MathSupport.isUnaryOperator(currentToken)) {
                 operatorStack.push(currentToken);
             }
             else if(currentToken.equals("pi"))
@@ -190,88 +178,6 @@ public class ArithmeticTerm {
         this.expression = postFixExpression;
 
         return postFixExpression;
-    }
-
-    /*
-     * A method which assists the convert() method by checking if a token is an operator.
-     *
-     * It supports the following binary operators:
-     * addition (+),
-     * subtraction (-),
-     * multiplication (*),
-     * division (/),
-     * and exponentiation ("^");
-     *
-     * @parameters token a String holding the token to be checked
-     * @return  a boolean, with true meaning that the token is an operator
-     *
-     * @author Mohamed ElGhamrawy
-     * */
-    public static boolean isBinaryOperator(String token)
-    {
-        switch (token) {
-            case "+":
-            case "-":
-            case "*":
-            case "/":
-            case "^":
-                return true;
-            default:
-                return false;
-        }
-    }
-
-    /*
-     * A method which assists the convert() method by checking if a token is an operator.
-     *
-     * It supports the following unary operators:
-     * square-rooting (sqrt),
-     * factorialization (!),
-     * sine (sin),
-     * cosine (cos),
-     * tangent (tan),
-     * natural exponentiation (exp),
-     * and multiplication by pi (pi).
-     *
-     * @parameters token a String holding the token to be checked
-     * @return  a boolean, with true meaning that the token is an operator
-     *
-     * @author Mohamed ElGhamrawy
-     * */
-    public static boolean isUnaryOperator(String token)
-    {
-        switch (token) {
-            case "sqrt":
-            case "!":
-            case "sin":
-            case "cos":
-            case "tan":
-            case "exp":
-            case "pi":
-                return true;
-            default:
-                return false;
-        }
-    }
-
-    /*
-     * A method which assists the convert() method by checking if a token is an operand of type double.
-     *
-     * @parameters token a String holding the token to be checked
-     * @return  a boolean, with true meaning that the token is an operand of type double.
-     *
-     * @author Hussam Kayed
-     * */
-    public boolean checkDouble(String token)
-    {
-        try
-        {
-            Double.parseDouble(token);
-        } catch(NumberFormatException exception)
-        {
-            return false;
-        }
-        return true;
     }
 
     public Stack<String> getReversedExpression() {

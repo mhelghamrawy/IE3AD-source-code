@@ -34,19 +34,18 @@ public class Tree {
         for (int i = 0; i < tokenizer.length; i++) {
             BiNode tree;
             // If binary operator, construct new parent node and add children from stack
-            if(ArithmeticTerm.isBinaryOperator((tokenizer[i]))) {
+            if(MathSupport.isBinaryOperator((tokenizer[i]))) {
                 tree = new BiNode(tokenizer[i]);
 
                 // Pop two top nodes
-                // Store top
-                tree.leftChildNode = stack.pop();
                 tree.rightChildNode = stack.pop();
+                tree.leftChildNode = stack.pop();
 
                 // Add this element to stack
                 stack.push(tree);
             }
             // If unary operator, construct new parent node and add child from stack
-            else if(ArithmeticTerm.isUnaryOperator(tokenizer[i])) {
+            else if(MathSupport.isUnaryOperator(tokenizer[i])) {
                 tree = new BiNode(tokenizer[i]);
 
                 tree.leftChildNode = stack.pop();
@@ -61,7 +60,7 @@ public class Tree {
         return stack.pop();
     }
 
-    /*
+    /**
      * A method which tokenizes the String with the postfix arithmetic term,
      * and uses a stack of Strings (java.util.Stack<String>) to store the tokens of the arithmetic expression.
      *
@@ -83,5 +82,12 @@ public class Tree {
         return tokenizedExpression;
     }
 
+    public void postorderTraversal() {
+
+    }
+
+    private void postorderTraversal(BiNode rootNode) {
+
+    }
 
 }
