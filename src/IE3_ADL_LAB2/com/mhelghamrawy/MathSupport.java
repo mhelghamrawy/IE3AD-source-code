@@ -1,4 +1,9 @@
 package IE3_ADL_LAB2.com.mhelghamrawy;
+/**
+ * A class to handle mathematical operations and error handling for class Tree.
+ *
+ * @author Mohamed ElGhamrawy
+ * */
 
 public class MathSupport {
 
@@ -94,5 +99,13 @@ public class MathSupport {
             return false;
         }
         return true;
+    }
+
+    public static void throwIncompleteArgumentsException() {
+        throw new IllegalStateException("Incorrect number of arguments given.");
+    }
+
+    public static void throwUnexpectedValueException(String element) {
+        throw new IllegalStateException("Unexpected value: " + element);
     }
 }

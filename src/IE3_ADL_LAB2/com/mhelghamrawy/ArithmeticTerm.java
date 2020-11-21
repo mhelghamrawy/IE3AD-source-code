@@ -99,7 +99,7 @@ public class ArithmeticTerm {
                 try {
                     operandStack.push(MathSupport.factorial(Integer.parseInt(element)));
                 } catch (Exception e) {
-                    throw new IllegalStateException("Unexpected value: " + element);
+                    MathSupport.throwUnexpectedValueException(element);
                 }
             }
             // sine
@@ -125,17 +125,19 @@ public class ArithmeticTerm {
                 try {
                     operandStack.push(Double.parseDouble(element));
                 } catch (Exception e) {
-                    throw new IllegalStateException("Unexpected value: " + element);
+                    MathSupport.throwUnexpectedValueException(element);
                 }
-
             }
         }
         double bottom = operandStack.pop();
 
-        if (operandStack.isEmpty())
+        if (operandStack.isEmpty()) {
             return bottom;
-        else
-            throw new IllegalStateException("Incorrect number of arguments given.");
+        }
+        else {
+            MathSupport.throwIncompleteArgumentsException();
+        }
+        return bottom;
     }
 
     /**
@@ -162,15 +164,14 @@ public class ArithmeticTerm {
             } else if (MathSupport.isBinaryOperator(currentToken) || MathSupport.isUnaryOperator(currentToken)) {
                 operatorStack.push(currentToken);
             }
-            else if(currentToken.equals("pi"))
-            {
+            else if(currentToken.equals("pi")) {
                 postFixExpression += "pi" + " ";
             }
             else if (currentToken.equals(")")) {
                 try {
                     postFixExpression += operatorStack.pop() + " ";
                 } catch (EmptyStackException exception) {
-                    System.out.println("Please check the syntax of the inserted arithmetic Expression");
+                    MathSupport.throwIncompleteArgumentsException();
                 }
             }
 
