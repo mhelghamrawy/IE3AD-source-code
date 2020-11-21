@@ -38,24 +38,24 @@ public abstract class Sort {
         return answer;
     }
 
-    protected static boolean isPartitioned(Comparable a[], int left, int border, int right) {
+    protected static boolean isPartitioned(Comparable a[], int left, int border, int right)
+    {
         Comparable[] firstPartArray = new Comparable[border-left+1];
-        System.arraycopy(a, left, firstPartArray, 0, border-left);
         Comparable[] secondPartArray = new Comparable[right-border+1];
+        Comparable maxOfFirstPartArray = 0;
+        System.arraycopy(a, left, firstPartArray, 0, border-left);
         System.arraycopy(a, border, secondPartArray, 0, right-border);
-
-        int maxOfFirstPartArray;
-        maxOfFirstPartArray = 0;
-
-        for(int i = 0; i < border-left; i++) {
-            if(maxOfFirstPartArray < (int) firstPartArray[i])
+        for(int i = 0; i < border-left; i++)
+        {
+            if(less(maxOfFirstPartArray, firstPartArray[i]))
             {
-                maxOfFirstPartArray = (int) firstPartArray[i];
+                maxOfFirstPartArray =  firstPartArray[i];
             }
             else
                 continue;
         }
-        for(int i = 0; i < right - border; i++) {
+        for(int i = 0; i < right - border; i++)
+        {
             if(less(maxOfFirstPartArray,secondPartArray[i]))
                 continue;
             else
