@@ -59,11 +59,7 @@ public class Records
         list= Arrays.asList(recs); // not required, why?
     }
 
-    public static void main(String[] a) {
-        Integer[] b = new Integer[] {1, 2, 3, 5};
-
-        Sort.isSorted(b, 0, 3);
-
+//    public static void main(String[] args) {
 //        Records recs= new Records(N);
 //        System.out.println( recs);
 //
@@ -78,5 +74,5 @@ public class Records
 //        System.out.println( recs);
 //        recs.selectionSort();
 //        System.out.println( recs);
-    }
+//    }
 }

@@ -6,13 +6,10 @@ package IE3_ADL_LAB3.com.mhelghamrawy;
  * @author Mohamed ElGhamrawy, based on code by Wolfgang Renz
  * @version Nov. 3, 2020
  */
-public class Selection extends Sort
-{
-    public static void sort(Comparable[] a)
-    {
+public class Selection extends Sort {
+    public static void sort(Comparable[] a) {
         int N = a.length;
-        for (int i = 0; i < N; i++) // i: destination site
-        {
+        for (int i = 0; i < N; i++) { // i: destination site
             int min = i; // index of minimum candidate
             for (int j = i+1; j < N; j++){
                 if (less(a[j], a[min])){

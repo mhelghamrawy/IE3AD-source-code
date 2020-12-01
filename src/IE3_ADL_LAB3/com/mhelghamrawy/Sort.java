@@ -1,7 +1,5 @@
 package IE3_ADL_LAB3.com.mhelghamrawy;
 
-import java.util.Arrays;
-import java.util.Random;
 /**
  * Abstract class Sort is responsible for operations and their counting.
  *
@@ -9,13 +7,18 @@ import java.util.Random;
  * @version Nov. 3, 2020
  */
 public abstract class Sort {
+    public static int copyOperations = 0;
+    public static int comparisonOperations = 0;
+
     protected static void exch(Comparable[] a, int i, int j) {
+        copyOperations++;
         Comparable t = a[i];
         a[i] = a[j];
         a[j] = t;
     }
 
     protected static boolean less(Comparable v, Comparable w) {
+        comparisonOperations++;
         return (v.compareTo(w) < 0);
     }
 
@@ -62,5 +65,10 @@ public abstract class Sort {
                 return false;
         }
         return true;
+    }
+
+    protected static void copy(Comparable[] dest, int i, Comparable[] source, int j) {
+        dest[i] = source[i];
+        copyOperations++;
     }
 }
