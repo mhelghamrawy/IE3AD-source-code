@@ -13,7 +13,7 @@ public class Tree {
     private final BiNode rootNode;
 
     // A field used to control indentation
-    private StringBuffer indent= new StringBuffer();
+    private StringBuffer indent = new StringBuffer();
 
     public class BiNode {
         public String element;
