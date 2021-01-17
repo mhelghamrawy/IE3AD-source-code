@@ -52,21 +52,43 @@ public class Huffman {
 
     private void initTable() {
         initTable(root, new StringBuffer());
+        /*table.put('s', "0");
+        table.put('e', "10");
+        table.put('_', "110");
+        table.put('l', "11101");
+        table.put('h', "11100");
+        table.put('a', "11110");
+        table.put('b', "1111110");
+        table.put('t', "11111000");
+        table.put('o', "11111010");
+        table.put('r', "11111000");
+        table.put('y', "11111011");*/
+
     }
 
     public void initTable(Node tree, StringBuffer prefix) {
         assert tree != null;
 
-        if(tree.ch == '*') {
+        if(tree.isInternal()) {
             // traverse left
-            prefix.append('0');
+            //if(tree != this.root) {
+                prefix.append('0');
+
+            //}
             initTable(tree.left, prefix);
-            prefix.deleteCharAt(prefix.length()-1);
+            //if(tree != this.root) {
+                prefix.deleteCharAt(prefix.length()-1);
+
+            //}
 
             // traverse right
-            prefix.append('1');
+            //if(tree != this.root) {
+                prefix.append('1');
+            //}
             initTable(tree.right, prefix);
-            prefix.deleteCharAt(prefix.length()-1);
+            //if(tree != this.root) {
+                prefix.deleteCharAt(prefix.length()-1);
+            //}
         } else {
             // add character and code for this leaf (which is just the prefix) to hash map
             String temp = prefix.toString();
@@ -93,7 +115,7 @@ public class Huffman {
             Node x = root;
             while (x.isInternal()) {
                 char bit = encodedSequence.charAt(i);
-                encodedSequence.deleteCharAt(i);
+                //encodedSequence.deleteCharAt(i);
                 if(bit == '0') {x = x.left;}
                 else if(bit == '1') { x = x.right;}
             }
