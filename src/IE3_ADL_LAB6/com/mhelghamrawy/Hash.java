@@ -70,11 +70,11 @@ public class Hash {
         int output = 0;
 
         for(int i = inputCharArray.length - 1; i >= 0; i--) {
-            output = output + (table.get(inputCharArray[i]) * modPower(53, n, M));
+            output = output + (table.get(inputCharArray[i])%M) * modPower(53, n, M);
             n++; // increment n to move to next least significant digit
         }
 
-        return (13%31) * output;
+        return (13%M) * output;
     }
 
     private static int modPower(int base, int exponent, int modulus) {
